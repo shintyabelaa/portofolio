@@ -1,12 +1,16 @@
+'use client'
+
 import Image from "next/image";
 import Navbar from "./components/Navbar";
 import HeroSection from "./components/HeroSection";
 import { CardSection } from "./components/CardSection";
-import FeatureSection from "./components/FeatureSection";
 import { ArrowRight, CheckCircle, StarIcon } from "lucide-react";
 import { PricingSection } from "./components/PricingSection";
 import { Button } from "@/components/ui/button";
 import { Footer } from "./components/Footer";
+import { useEffect, useState } from "react";
+import AboutSection from "./components/AboutSection";
+import ExperienceSection from "./components/ExperienceSection";
 
 // const imageLoader = ({ src, width, quality }) => {
 //   return `https://example.com/${src}?w=${width}&q=${quality || 75}`
@@ -44,46 +48,35 @@ const testimonial = [
 ];
 
 export default function Home() {
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePos({ x: e.clientX, y: e.clientY });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
   return (
-    <div className="flex flex-col">
+    <div className="flex bg-background flex-col">
+      <div className="fixed inset-0 pointer-events-none">
+        <div
+          className="absolute w-96 h-96 bg-primary/10 rounded-full blur-3xl"
+          style={{
+            left: `${mousePos.x - 192}px`,
+            top: `${mousePos.y - 192}px`,
+            transform: 'translate(-50%, -50%)',
+            transition: 'all 0.2s ease-out',
+          }}
+        />
+      </div>
       <Navbar />
       <HeroSection />
       <main className="flex flex-1 w-full flex-col">
-        <FeatureSection />
-        <div className="flex flex-col items-center bg-[#c8f9fd]/20 px-32 py-16 gap-4">
-          <h1 className="text-5xl flex flex-col gap-2 font-bold">
-            See It In Action
-          </h1>
-          <p className="text-lg max-w-2xl text-center text-gray-600">
-            Intuitive interface that makes managing your finances simple and
-            enjoyable.
-          </p>
-
-          <div className="flex items-center w-full mt-12 gap-2">
-            <Image
-              src="/dashboard.png"
-              alt="Picture of the author"
-              className="w-full h-auto rounded-lg shadow-lg"
-              width={1200}
-              height={800}
-            />
-          </div>
-          <div className="grid w-full grid-cols-3 justify-between mt-12">
-            <div className="flex items-center flex-col">
-              <div className="font-bold text-2xl text-[#4970cc]">100%</div>
-              <p>Real Time Sync</p>
-            </div>
-            <div className="flex items-center flex-col">
-              <div className="font-bold text-2xl text-[#4970cc]">256-bit</div>
-              <p>Bank-level Security</p>
-            </div>
-            <div className="flex items-center flex-col">
-              <div className="font-bold text-2xl text-[#4970cc]">0%</div>
-              <p>Transaction Fees</p>
-            </div>
-          </div>
-        </div>
-
+        <AboutSection />
+        <ExperienceSection />
         <div className="flex flex-col items-center px-32 py-16 gap-4">
           <h1 className="text-5xl flex flex-col gap-2 font-bold">
             Loved by Thousands of Users

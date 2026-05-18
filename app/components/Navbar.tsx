@@ -12,21 +12,19 @@ export default function Navbar() {
       <div className="container mx-auto flex h-16 items-center justify-between">
         {/* Logo */}
         <div className="flex gap-2 items-center">
-          <div className="text-lg bg-[#4970cc] p-2 text-white rounded font-bold">
-            FN
-          </div>
-          <div className="text-xl text-[#4970cc] font-bold">Portofolio</div>
+          <div className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent"
+            style={{ animation: 'slideInLeft 0.6s ease-out' }}>Portofolio</div>
         </div>
 
         <NavigationMenu className="hidden md:flex">
           <NavigationMenuList>
             <NavigationMenuItem>
-              <a href="#features" className="px-4 py-2">
+              <a href="#" className="px-4 py-2">
                 Home
               </a>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <a href="#pricing" className="px-4 py-2">
+              <a href="#about" className="px-4 py-2">
                 Summary
               </a>
             </NavigationMenuItem>
